@@ -7,6 +7,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.medilaboNotes.model.Declencheurs;
 import com.medilaboNotes.model.Note;
 import com.medilaboNotes.repositories.NoteRepository;
 
@@ -36,26 +37,26 @@ public class NoteService {
 		return noteRepository.findAllNotes();
 	}
 
-	public List<Note> findPatientAndNote(String patient, String symp) {
+	public List<Note> findPatientAndNote(String patient, Declencheurs symp) {
 		return noteRepository.findPatientAndNote(patient, symp);
 	}
 
 	public List<String> getPatientNotesContaining(String patient) {
-		String symptomes[] = new String[] { "Hémoglobine", "Microalbumine", "Taille", "Poids", "Fumeu", "Anormal",
-				"Cholestérol", "Vertige", "Rechute", "Réaction", "Anticorps" };
-		List<String> list = Arrays.asList(symptomes);
+//		String symptomes[] = new String[] { "Hémoglobine", "Microalbumine", "Taille", "Poids", "Fumeu", "Anormal",
+//				"Cholestérol", "Vertige", "Rechute", "Réaction", "Anticorps" };
+
+		List<Declencheurs> list = Arrays.asList(Declencheurs.values());
 		List<String> count = new ArrayList<>();
 
 		list.forEach(symp -> {
 			List<Note> listSymp = noteRepository.findPatientAndNote(patient, symp);
 			if (listSymp.size() > 0) {
-				count.add(symp);
+				count.add(symp.toString());
 			}
 		});
 
 		String decl = "fume";
-		System.out.println(count);
+		System.out.println(list);
 		return count;
 	}
-
 }

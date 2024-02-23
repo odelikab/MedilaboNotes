@@ -7,6 +7,7 @@ import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.data.mongodb.repository.Query;
 import org.springframework.stereotype.Repository;
 
+import com.medilaboNotes.model.Declencheurs;
 import com.medilaboNotes.model.Note;
 
 @Repository
@@ -16,7 +17,7 @@ public interface NoteRepository extends MongoRepository<Note, String> {
 	public List<Note> findByPatientAndPatId(String patient, Integer patid);
 
 	@Query(value = "{ 'patient' : ?0, 'note':{$regex : ?1, $options: 'i'}}", fields = "{patId : 1, patient : 1, note : 1}")
-	public List<Note> findPatientAndNote(String patient, String decl);
+	public List<Note> findPatientAndNote(String patient, Declencheurs symp);
 
 	public List<Note> findByPatientAndNoteContaining(String patient, String decl);
 

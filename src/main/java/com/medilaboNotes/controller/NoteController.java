@@ -39,8 +39,8 @@ public class NoteController {
 		return noteService.findNoteById(id);
 	}
 
-	@GetMapping("/custom")
-	public List<String> getPatientNotesContaining(String patient) {
+	@GetMapping("/custom/{patient}")
+	public List<String> getPatientNotesContaining(@PathVariable String patient) {
 
 		return noteService.getPatientNotesContaining(patient);
 	}
