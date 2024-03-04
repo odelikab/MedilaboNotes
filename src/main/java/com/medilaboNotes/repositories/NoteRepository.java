@@ -12,7 +12,9 @@ import com.medilaboNotes.model.Note;
 
 @Repository
 public interface NoteRepository extends MongoRepository<Note, String> {
-	public List<Note> findByPatId(Integer id);
+	public List<Note> findByPatient(String patient);
+
+	public List<Note> findByPatId(int id);
 
 	public List<Note> findByPatientAndPatId(String patient, Integer patid);
 
@@ -25,5 +27,5 @@ public interface NoteRepository extends MongoRepository<Note, String> {
 	public List<Object> groupByPatient();
 
 	@Aggregation("{ '$project': { '_id' : '$note' } }")
-	public List<String> findAllNotes();
+	public List<String> findAllPatientsNotes();
 }

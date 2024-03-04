@@ -25,8 +25,8 @@ public class NoteService {
 		return noteRepository.insert(note);
 	}
 
-	public List<Note> findNoteById(Integer id) {
-		return noteRepository.findByPatId(id);
+	public List<Note> findNoteById(int patient) {
+		return noteRepository.findByPatId(patient);
 	}
 
 	public List<Object> getPatientGroups() {
@@ -34,7 +34,7 @@ public class NoteService {
 	}
 
 	public Object getPatientNotes() {
-		return noteRepository.findAllNotes();
+		return noteRepository.findAllPatientsNotes();
 	}
 
 	public List<Note> findPatientAndNote(String patient, Declencheurs symp) {
@@ -45,18 +45,18 @@ public class NoteService {
 //		String symptomes[] = new String[] { "Hémoglobine", "Microalbumine", "Taille", "Poids", "Fumeu", "Anormal",
 //				"Cholestérol", "Vertige", "Rechute", "Réaction", "Anticorps" };
 
-		List<Declencheurs> list = Arrays.asList(Declencheurs.values());
+		List<Declencheurs> listDeclencheurs = Arrays.asList(Declencheurs.values());
 		List<String> count = new ArrayList<>();
 
-		list.forEach(symp -> {
+		listDeclencheurs.forEach(symp -> {
 			List<Note> listSymp = noteRepository.findPatientAndNote(patient, symp);
 			if (listSymp.size() > 0) {
 				count.add(symp.toString());
 			}
 		});
 
-		String decl = "fume";
-		System.out.println(list);
+//		String decl = "fume";
+//		System.out.println(list);
 		return count;
 	}
 }

@@ -35,12 +35,12 @@ public class NoteController {
 	}
 
 	@GetMapping("/{id}")
-	public List<Note> getBook(@PathVariable Integer id) {
+	public List<Note> getNotesById(@PathVariable("id") int id) {
 		return noteService.findNoteById(id);
 	}
 
-	@GetMapping("/custom/{patient}")
-	public List<String> getPatientNotesContaining(@PathVariable String patient) {
+	@GetMapping("/declencheurs/{patient}")
+	public List<String> getPatientNotesContaining(@PathVariable("patient") String patient) {
 
 		return noteService.getPatientNotesContaining(patient);
 	}
